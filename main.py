@@ -12,7 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 
 # 1. 설정
-API_KEY = "AIzaSyC4fiZRe4KB6mTbhrmwN5d4DKw2DiQZ8D8"
+API_KEY = os.getenv("GEMINI_API_KEY")
 # Gemini 2.5 Flash 모델 경로 적용
 GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={API_KEY}"
 TARGET_URL = "https://map.naver.com/p/entry/place/1671594903?c=15.00,0,0,0,dh&placePath=/feed"
@@ -20,7 +20,7 @@ TARGET_URL = "https://map.naver.com/p/entry/place/1671594903?c=15.00,0,0,0,dh&pl
 def get_optimized_menu_url():
     """네이버 지도에서 메뉴판 URL을 추출하고 사이즈를 750x452로 최적화합니다."""
     options = Options()
-    # options.add_argument("--headless") # 작동 확인 후 주석 해제하여 사용하세요
+    options.add_argument("--headless") # 작동 확인 후 주석 해제하여 사용하세요
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     
     try:
